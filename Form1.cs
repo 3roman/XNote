@@ -30,14 +30,14 @@ namespace XNote
             // 下拉到最后一行
             dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2];
             // 设置背景色
-            var style = new DataGridViewCellStyle {BackColor = Color.FromArgb(91, 155, 213)};
+            var style = new DataGridViewCellStyle { BackColor = Color.FromArgb(237, 125, 49) };
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
                 col.HeaderCell.Style = style;
             }
             dataGridView1.EnableHeadersVisualStyles = false;
 
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(221, 235, 247);
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(252, 228, 214);
         }
 
         
@@ -150,8 +150,6 @@ namespace XNote
                 return dt;
             }
         }
-
-        // rowhead显示行号
 
         
     }

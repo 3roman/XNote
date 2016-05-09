@@ -14,19 +14,8 @@ namespace XNote
             
             InitializeComponent();
 
-            var dt = Query("SELECT * FROM xnote");
-            //dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 避免dgv加载时也触发changed事件
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-            // 禁止自动创建列
-            dataGridView1.AutoGenerateColumns = false;
-            // 绑定列数据源属性
-            dataGridView1.Columns[0].DataPropertyName = "序号";
-            dataGridView1.Columns[1].DataPropertyName = "记录";
-            dataGridView1.Columns[2].DataPropertyName = "分类";
-            dataGridView1.Columns[3].DataPropertyName = "来源";
-            // dgv绑定datatable
-            dataGridView1.DataSource = dt;
             // 下拉到最后一行
             dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2];
             // 设置背景色
@@ -36,8 +25,19 @@ namespace XNote
                 col.HeaderCell.Style = style;
             }
             dataGridView1.EnableHeadersVisualStyles = false;
-
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(252, 228, 214);
+
+            
+            // 禁止自动创建列
+            dataGridView1.AutoGenerateColumns = false;
+            // 绑定列数据源属性
+            dataGridView1.Columns[0].DataPropertyName = "序号";
+            dataGridView1.Columns[1].DataPropertyName = "记录";
+            dataGridView1.Columns[2].DataPropertyName = "分类";
+            dataGridView1.Columns[3].DataPropertyName = "来源";
+            var dt = Query("SELECT * FROM xnote");
+            // dgv绑定datatable
+            dataGridView1.DataSource = dt;
         }
 
         
@@ -124,11 +124,15 @@ namespace XNote
             TextRenderer.DrawText(e.Graphics, rownum.ToString(), ((DataGridView)sender).RowHeadersDefaultCellStyle.Font, rct, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, Color.Transparent, TextFormatFlags.Right);
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == 27)
+            if (e.KeyCode == Keys.Escape && textBox1.Focused)
             {
                 textBox1.Clear();
+            }
+            else if(e.Modifiers == Keys.Control && e.KeyCode == Keys.F)
+            {
+                textBox1.Focus();
             }
         }
 
@@ -150,6 +154,8 @@ namespace XNote
                 return dt;
             }
         }
+
+        
 
         
     }

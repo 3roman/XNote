@@ -166,14 +166,22 @@ namespace XNote
                 MessageBox.Show("请设置标准规范所在目录", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var standards = new Dictionary<string, string>();
-            FindFiles(standardDirectory, standards);
-            var standard = dgv.SelectedRows[0].Cells[3].Value + "";
-            standard = standard.Substring(0, standard.LastIndexOf(' '));
-            foreach (var item in standards.Where(item => item.Key.Contains(standard)))
+            try
             {
-                Process.Start(item.Value);
+                var standards = new Dictionary<string, string>();
+                FindFiles(standardDirectory, standards);
+                var standard = dgv.SelectedRows[0].Cells[3].Value + "";
+                standard = standard.Substring(0, standard.LastIndexOf(' '));
+                foreach (var item in standards.Where(item => item.Key.Contains(standard)))
+                {
+                    Process.Start(item.Value);
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("打开文件失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void mnuSetDirectory_Click(object sender, EventArgs e)

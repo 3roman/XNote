@@ -19,8 +19,7 @@ namespace XNote
 
             // 设置标题栏
             // 版本号组成：主版本+次版本+内部版本号+修订号
-            var title = string.Format("XNote Ver{0}   『C0der by hangch』", Application.ProductVersion);
-            Text = title;
+            Text = string.Format("XNote Ver{0}   『C0der by hangch』", Application.ProductVersion); ;
 
             // 释放资源
             ReleaseResource("System.Data.SQLite.dll", "XNote.System.Data.SQLite.dll");
@@ -28,9 +27,6 @@ namespace XNote
 
             // 在控件初始化(InitializeComponent)后才订阅CellValueChanged事件
             dgv.CellValueChanged += dgv_CellValueChanged;
-
-            // 下拉到最后一行
-            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[2];
 
             // 设置背景色
             var style = new DataGridViewCellStyle {BackColor = Color.FromArgb(237, 125, 49)};
@@ -48,11 +44,15 @@ namespace XNote
             dgv.Columns[1].DataPropertyName = "记录";
             dgv.Columns[2].DataPropertyName = "分类";
             dgv.Columns[3].DataPropertyName = "来源";
-            var dt = Query("SELECT * FROM xnote");
 
-            // dgv绑定datatable
+            // 绑定数据源
+            var dt = Query("SELECT * FROM xnote");
             dgv.DataSource = dt;
+
+            // 一拉到底
+            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[2];
         }
+
 
         // 增+改
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -106,11 +106,13 @@ namespace XNote
 
         private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            switch (e.Button)
             {
-                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                dgv.ClearSelection();
-                dgv.Rows[e.RowIndex].Selected = true;
+                case MouseButtons.Right:
+                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                    dgv.ClearSelection();
+                    dgv.Rows[e.RowIndex].Selected = true;
+                    break;
             }
         }
 
@@ -142,19 +144,32 @@ namespace XNote
             dgv.DataSource = dt;
         }
 
-        private void txt_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (27 == e.KeyChar)
+            if (Keys.Escape == e.KeyCode && txt.Focused)
             {
                 txt.Clear();
             }
+            else if (Keys.F5 == e.KeyCode)
+            {
+                mnuFlushItem_Click(null, null);
+            }
         }
+
 
         private void mnuNewItem_Click(object sender, EventArgs e)
         {
             dgv.FirstDisplayedCell = dgv.Rows[dgv.Rows.Count - 1].Cells[1]; 
             dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[1];
             dgv.BeginEdit(true);
+        }
+
+        private void mnuFlushItem_Click(object sender, EventArgs e)
+        {
+            txt.Clear();
+            var dt = Query("SELECT * FROM xnote");
+            dgv.DataSource = dt;
         }
 
         private void mnuOpenStandrad_Click(object sender, EventArgs e)
@@ -187,11 +202,9 @@ namespace XNote
         private void mnuSetDirectory_Click(object sender, EventArgs e)
         {
             var standardDirectory = SelectPath("请选择标准文件目录");
-            if (Directory.Exists(standardDirectory))
-            {
-                var sql = string.Format("UPDATE config SET 标准目录='{0}'", standardDirectory);
-                Query(sql);
-            }
+            if (!Directory.Exists(standardDirectory)) return;
+            var sql = string.Format("UPDATE config SET 标准目录='{0}'", standardDirectory);
+            Query(sql);
         }
 
         private void mnuViewPicture_Click(object sender, EventArgs e)
@@ -255,17 +268,15 @@ namespace XNote
             // MessageBox.Show(file);
             var stream = assembly.GetManifestResourceStream(resourceName);
             // 将流读取到二进制数组中
-            if (stream != null)
-            {
-                var buffer = new byte[stream.Length];
-                stream.Read(buffer, 0, buffer.Length);
-                // 将二进制写入文件
-                if (File.Exists(filePath)) return;
-                var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write);
-                fs.Write(buffer, 0, buffer.Length);
-                fs.Flush();
-                fs.Close();
-            }
+            if (stream == null) return;
+            var buffer = new byte[stream.Length];
+            stream.Read(buffer, 0, buffer.Length);
+            // 将二进制写入文件
+            if (File.Exists(filePath)) return;
+            var fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write);
+            fs.Write(buffer, 0, buffer.Length);
+            fs.Flush();
+            fs.Close();
         }
 
         /// <summary>

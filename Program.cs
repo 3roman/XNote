@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using System.Reflection;
 
 namespace XNote
 {
@@ -17,9 +14,10 @@ namespace XNote
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-
-            Application.Run(new Form1());
+            // 设置标题栏
+            // 版本号组成：主版本+次版本+内部版本号+修订号
+            var title = string.Format("XNote Ver{0}   『C0der by hangch』", Application.ProductVersion);
+            Application.Run(new Form1 { Text = title });
         }
 
 

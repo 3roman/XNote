@@ -17,10 +17,6 @@ namespace XNote
         {
             InitializeComponent();
 
-            // 设置标题栏
-            // 版本号组成：主版本+次版本+内部版本号+修订号
-            Text = string.Format("XNote Ver{0}   『C0der by hangch』", Application.ProductVersion); ;
-
             // 释放资源
             ReleaseResource("System.Data.SQLite.dll", "XNote.System.Data.SQLite.dll");
             ReleaseResource("XNote.db", "XNote.XNote.db");
@@ -28,12 +24,13 @@ namespace XNote
             // 在控件初始化(InitializeComponent)后才订阅CellValueChanged事件
             dgv.CellValueChanged += dgv_CellValueChanged;
 
-            // 设置背景色
-            var style = new DataGridViewCellStyle {BackColor = Color.FromArgb(237, 125, 49)};
+            // 设置表头背景色
+            var cellStyle = new DataGridViewCellStyle {BackColor = Color.FromArgb(237, 125, 49)};
             foreach (DataGridViewColumn col in dgv.Columns)
             {
-                col.HeaderCell.Style = style;
+                col.HeaderCell.Style = cellStyle;
             }
+            // 设置奇数行背景色
             dgv.EnableHeadersVisualStyles = false;
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(252, 228, 214);
 
@@ -45,14 +42,21 @@ namespace XNote
             dgv.Columns[2].DataPropertyName = "分类";
             dgv.Columns[3].DataPropertyName = "来源";
 
-            // 绑定数据源
-            var dt = Query("SELECT * FROM xnote");
-            dgv.DataSource = dt;
-
-            // 一拉到底
-            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[2];
+            // 初始化datagridview控件
+            dgv_Initial();
         }
 
+
+        // 初始化datagridview控件内容
+        private void dgv_Initial()
+        {
+            txt.Clear();
+            var dt = Query("SELECT * FROM xnote");
+            // 装载数据源
+            dgv.DataSource = dt;
+            // 一拉到底
+            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count-1].Cells[1];
+        }
 
         // 增+改
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -104,31 +108,6 @@ namespace XNote
             }
         }
 
-        private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            switch (e.Button)
-            {
-                case MouseButtons.Right:
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                    dgv.ClearSelection();
-                    dgv.Rows[e.RowIndex].Selected = true;
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// 显示行号
-        /// </summary>
-        private void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            var rownum = e.RowIndex;
-            var rct = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y + 4,
-                ((DataGridView)sender).RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, rownum.ToString(), ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
-                rct, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, Color.Transparent,
-                TextFormatFlags.Right);
-        }
-
         // 查
         private void txt_TextChanged(object sender, EventArgs e)
         {
@@ -144,32 +123,41 @@ namespace XNote
             dgv.DataSource = dt;
         }
 
+        private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Right:
+                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                    dgv.ClearSelection();
+                    dgv.Rows[e.RowIndex].Selected = true;
+                    break;
+            }
+        }
+    
+        // 显示行号
+        private void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var rownum = e.RowIndex;
+            var rct = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y + 4,
+                ((DataGridView)sender).RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, rownum.ToString(), ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
+                rct, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, Color.Transparent,
+                TextFormatFlags.Right);
+        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Keys.Escape == e.KeyCode && txt.Focused)
+            if ((Keys.Escape == e.KeyCode && txt.Focused) || Keys.F5 == e.KeyCode)
             {
-                txt.Clear();
-            }
-            else if (Keys.F5 == e.KeyCode)
-            {
-                mnuFlushItem_Click(null, null);
+                dgv_Initial();
             }
         }
 
 
         private void mnuNewItem_Click(object sender, EventArgs e)
         {
-            dgv.FirstDisplayedCell = dgv.Rows[dgv.Rows.Count - 1].Cells[1]; 
-            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[1];
-            dgv.BeginEdit(true);
-        }
-
-        private void mnuFlushItem_Click(object sender, EventArgs e)
-        {
-            txt.Clear();
-            var dt = Query("SELECT * FROM xnote");
-            dgv.DataSource = dt;
+           dgv_Initial();
         }
 
         private void mnuOpenStandrad_Click(object sender, EventArgs e)
@@ -224,7 +212,7 @@ namespace XNote
         }
 
         /// <summary>
-        ///     执行SQL语句，返回datatable
+        /// 执行SQL语句，返回datatable
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <returns></returns>

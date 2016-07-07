@@ -47,7 +47,6 @@
             this.mnuViewPicture = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuBackUP = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFlushItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -129,7 +128,6 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuNewItem,
-            this.mnuFlushItem,
             this.toolStripSeparator2,
             this.mnuOpenStandrad,
             this.mnuSetDirectory,
@@ -137,59 +135,52 @@
             this.toolStripSeparator1,
             this.mnuBackUP});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 148);
             // 
             // mnuNewItem
             // 
             this.mnuNewItem.Name = "mnuNewItem";
-            this.mnuNewItem.Size = new System.Drawing.Size(136, 22);
+            this.mnuNewItem.Size = new System.Drawing.Size(152, 22);
             this.mnuNewItem.Text = "新增记录";
             this.mnuNewItem.Click += new System.EventHandler(this.mnuNewItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // mnuOpenStandrad
             // 
             this.mnuOpenStandrad.Name = "mnuOpenStandrad";
-            this.mnuOpenStandrad.Size = new System.Drawing.Size(136, 22);
+            this.mnuOpenStandrad.Size = new System.Drawing.Size(152, 22);
             this.mnuOpenStandrad.Text = "打开标准";
             this.mnuOpenStandrad.Click += new System.EventHandler(this.mnuOpenStandrad_Click);
             // 
             // mnuSetDirectory
             // 
             this.mnuSetDirectory.Name = "mnuSetDirectory";
-            this.mnuSetDirectory.Size = new System.Drawing.Size(136, 22);
+            this.mnuSetDirectory.Size = new System.Drawing.Size(152, 22);
             this.mnuSetDirectory.Text = "设置目录";
             this.mnuSetDirectory.Click += new System.EventHandler(this.mnuSetDirectory_Click);
             // 
             // mnuViewPicture
             // 
             this.mnuViewPicture.Name = "mnuViewPicture";
-            this.mnuViewPicture.Size = new System.Drawing.Size(136, 22);
+            this.mnuViewPicture.Size = new System.Drawing.Size(152, 22);
             this.mnuViewPicture.Text = "查看图片";
             this.mnuViewPicture.Click += new System.EventHandler(this.mnuViewPicture_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // mnuBackUP
             // 
             this.mnuBackUP.Name = "mnuBackUP";
-            this.mnuBackUP.Size = new System.Drawing.Size(136, 22);
+            this.mnuBackUP.Size = new System.Drawing.Size(152, 22);
             this.mnuBackUP.Text = "备份数据库";
             this.mnuBackUP.Click += new System.EventHandler(this.mnuBackUP_Click);
-            // 
-            // mnuFlushItem
-            // 
-            this.mnuFlushItem.Name = "mnuFlushItem";
-            this.mnuFlushItem.Size = new System.Drawing.Size(136, 22);
-            this.mnuFlushItem.Text = "刷新纪录";
-            this.mnuFlushItem.Click += new System.EventHandler(this.mnuFlushItem_Click);
             // 
             // Form1
             // 
@@ -229,7 +220,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuViewPicture;
         private System.Windows.Forms.ToolStripMenuItem mnuNewItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem mnuFlushItem;
     }
 }
 

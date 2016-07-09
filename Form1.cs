@@ -30,6 +30,7 @@ namespace XNote
             {
                 col.HeaderCell.Style = cellStyle;
             }
+           
             // 设置奇数行背景色
             dgv.EnableHeadersVisualStyles = false;
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(252, 228, 214);
@@ -141,7 +142,7 @@ namespace XNote
             var rownum = e.RowIndex;
             var rct = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y + 4,
                 ((DataGridView)sender).RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, rownum.ToString(), ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
+            TextRenderer.DrawText(e.Graphics, rownum + "", ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
                 rct, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, Color.Transparent,
                 TextFormatFlags.Right);
         }
@@ -151,6 +152,11 @@ namespace XNote
             if ((Keys.Escape == e.KeyCode && txt.Focused) || Keys.F5 == e.KeyCode)
             {
                 dgv_Initial();
+            }
+            else if ((Keys.D | Keys.Control) == e.KeyData)
+            {
+                dgv.CurrentCell.Value = dgv.Rows[dgv.CurrentCell.RowIndex - 1].Cells[dgv.CurrentCell.ColumnIndex].Value;
+                dgv.BeginEdit(false);
             }
         }
 

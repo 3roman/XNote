@@ -15,7 +15,11 @@ namespace XNote
     {
         public Form1()
         {
-            InitializeComponent();
+            //设置窗体的双缓冲
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint, true);
+            UpdateStyles();
+            
+            InitializeComponent();
 
             // 释放资源
             ReleaseResource("System.Data.SQLite.dll", "XNote.System.Data.SQLite.dll");
@@ -42,6 +46,12 @@ namespace XNote
             dgv.Columns[1].DataPropertyName = "记录";
             dgv.Columns[2].DataPropertyName = "分类";
             dgv.Columns[3].DataPropertyName = "来源";
+ 
+            //利用反射设置DataGridView的双缓冲
+            var dgvType = dgv.GetType();
+            var pi = dgvType.GetProperty("DoubleBuffered",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, true, null);
 
             // 初始化datagridview控件
             dgv_Initial();

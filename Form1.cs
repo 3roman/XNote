@@ -163,17 +163,42 @@ namespace XNote
             {
                 dgv_Initial();
             }
-            else if ((Keys.D | Keys.Control) == e.KeyData)
+            else if ((Keys.D | Keys.Control) == e.KeyData && dgv.Focused)
             {
                 dgv.CurrentCell.Value = dgv.Rows[dgv.CurrentCell.RowIndex - 1].Cells[dgv.CurrentCell.ColumnIndex].Value;
                 dgv.BeginEdit(false);
             }
+            else if ((Keys.F | Keys.Control) == e.KeyData)
+            {
+                txt.Focus();
+            }
+            else if ((Keys.C | Keys.Control) == e.KeyData && dgv.Focused && !dgv.CurrentCell.IsInEditMode)
+            {
+                Copy2Clipboard(dgv.SelectedCells[0].Value + string.Empty);
+            }
+            else if ((Keys.V | Keys.Control) == e.KeyData && dgv.Focused && !dgv.CurrentCell.IsInEditMode)
+            {
+                dgv.CurrentCell.Value = Clipboard.GetData(DataFormats.Text);
+                dgv.BeginEdit(false);
+            }
+           else if ((Keys.N | Keys.Control) == e.KeyData && dgv.Focused)
+           {
+               mnuNewItem_Click(null, null);
+           }
+          
         }
 
 
         private void mnuNewItem_Click(object sender, EventArgs e)
         {
-           dgv_Initial();
+            dgv_Initial();
+            dgv.BeginEdit(true);
+
+        }
+
+        private void mnuFlushItems_Click(object sender, EventArgs e)
+        {
+            dgv_Initial();
         }
 
         private void mnuOpenStandrad_Click(object sender, EventArgs e)
@@ -216,7 +241,7 @@ namespace XNote
             //TODO
         }
 
-        private void mnuBackUP_Click(object sender, EventArgs e)
+        private void mnuBackUp_Click(object sender, EventArgs e)
         {
             var dt = DateTime.Now;
             var filename = dt.ToString("yyyy-MM-dd") + ".db";
@@ -304,6 +329,12 @@ namespace XNote
             {
                 files.Add(f.Name, f.FullName);
             }
+        }
+
+        public static void Copy2Clipboard(string context)
+        {
+            Clipboard.Clear();
+            Clipboard.SetData(DataFormats.Text, context);
         }
     }
 

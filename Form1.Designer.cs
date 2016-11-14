@@ -34,21 +34,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txt = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuNewItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFlushItems = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuOpenStandrad = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSetDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuViewPicture = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSavePicture1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSavePicture2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDeletePicture = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuBackUP = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFlushItems = new System.Windows.Forms.ToolStripMenuItem();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,34 +84,6 @@
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             this.dgv.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgv_UserDeletingRow);
             // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "序号";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 80F;
-            this.Column2.HeaderText = "记录";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column3.FillWeight = 10F;
-            this.Column3.HeaderText = "分类";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.FillWeight = 10F;
-            this.Column4.HeaderText = "来源";
-            this.Column4.Name = "Column4";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -136,63 +113,128 @@
             this.toolStripSeparator2,
             this.mnuOpenStandrad,
             this.mnuSetDirectory,
+            this.toolStripSeparator3,
             this.mnuViewPicture,
+            this.toolStripMenuItem1,
+            this.mnuDeletePicture,
             this.toolStripSeparator1,
             this.mnuBackUP});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 198);
             // 
             // mnuNewItem
             // 
             this.mnuNewItem.Name = "mnuNewItem";
-            this.mnuNewItem.Size = new System.Drawing.Size(152, 22);
+            this.mnuNewItem.Size = new System.Drawing.Size(136, 22);
             this.mnuNewItem.Text = "新增记录";
             this.mnuNewItem.Click += new System.EventHandler(this.mnuNewItem_Click);
+            // 
+            // mnuFlushItems
+            // 
+            this.mnuFlushItems.Name = "mnuFlushItems";
+            this.mnuFlushItems.Size = new System.Drawing.Size(136, 22);
+            this.mnuFlushItems.Text = "刷新纪录";
+            this.mnuFlushItems.Click += new System.EventHandler(this.mnuFlushItems_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
             // 
             // mnuOpenStandrad
             // 
             this.mnuOpenStandrad.Name = "mnuOpenStandrad";
-            this.mnuOpenStandrad.Size = new System.Drawing.Size(152, 22);
+            this.mnuOpenStandrad.Size = new System.Drawing.Size(136, 22);
             this.mnuOpenStandrad.Text = "打开标准";
             this.mnuOpenStandrad.Click += new System.EventHandler(this.mnuOpenStandrad_Click);
             // 
             // mnuSetDirectory
             // 
             this.mnuSetDirectory.Name = "mnuSetDirectory";
-            this.mnuSetDirectory.Size = new System.Drawing.Size(152, 22);
+            this.mnuSetDirectory.Size = new System.Drawing.Size(136, 22);
             this.mnuSetDirectory.Text = "设置目录";
             this.mnuSetDirectory.Click += new System.EventHandler(this.mnuSetDirectory_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(133, 6);
             // 
             // mnuViewPicture
             // 
             this.mnuViewPicture.Name = "mnuViewPicture";
-            this.mnuViewPicture.Size = new System.Drawing.Size(152, 22);
+            this.mnuViewPicture.Size = new System.Drawing.Size(136, 22);
             this.mnuViewPicture.Text = "查看图片";
             this.mnuViewPicture.Click += new System.EventHandler(this.mnuViewPicture_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSavePicture1,
+            this.mnuSavePicture2});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.toolStripMenuItem1.Text = "保存图片";
+            // 
+            // mnuSavePicture1
+            // 
+            this.mnuSavePicture1.Name = "mnuSavePicture1";
+            this.mnuSavePicture1.Size = new System.Drawing.Size(136, 22);
+            this.mnuSavePicture1.Text = "来自剪切板";
+            this.mnuSavePicture1.Click += new System.EventHandler(this.mnuSavePicture1_Click);
+            // 
+            // mnuSavePicture2
+            // 
+            this.mnuSavePicture2.Name = "mnuSavePicture2";
+            this.mnuSavePicture2.Size = new System.Drawing.Size(136, 22);
+            this.mnuSavePicture2.Text = "来自文件";
+            // 
+            // mnuDeletePicture
+            // 
+            this.mnuDeletePicture.Name = "mnuDeletePicture";
+            this.mnuDeletePicture.Size = new System.Drawing.Size(136, 22);
+            this.mnuDeletePicture.Text = "删除图片";
+            this.mnuDeletePicture.Click += new System.EventHandler(this.mnuDeletePicture_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // mnuBackUP
             // 
             this.mnuBackUP.Name = "mnuBackUP";
-            this.mnuBackUP.Size = new System.Drawing.Size(152, 22);
+            this.mnuBackUP.Size = new System.Drawing.Size(136, 22);
             this.mnuBackUP.Text = "备份数据库";
             this.mnuBackUP.Click += new System.EventHandler(this.mnuBackUp_Click);
             // 
-            // mnuFlushItems
+            // Column1
             // 
-            this.mnuFlushItems.Name = "mnuFlushItems";
-            this.mnuFlushItems.Size = new System.Drawing.Size(152, 22);
-            this.mnuFlushItems.Text = "刷新纪录";
-            this.mnuFlushItems.Click += new System.EventHandler(this.mnuFlushItems_Click);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "序号";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 155.9391F;
+            this.Column2.HeaderText = "记录";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column3.FillWeight = 19.49239F;
+            this.Column3.HeaderText = "分类";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.FillWeight = 19.49239F;
+            this.Column4.HeaderText = "来源";
+            this.Column4.Name = "Column4";
             // 
             // Form1
             // 
@@ -207,6 +249,7 @@
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -228,11 +271,16 @@
         private System.Windows.Forms.ToolStripMenuItem mnuViewPicture;
         private System.Windows.Forms.ToolStripMenuItem mnuNewItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuFlushItems;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mnuSavePicture1;
+        private System.Windows.Forms.ToolStripMenuItem mnuSavePicture2;
+        private System.Windows.Forms.ToolStripMenuItem mnuDeletePicture;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.ToolStripMenuItem mnuFlushItems;
     }
 }
 

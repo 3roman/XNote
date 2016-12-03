@@ -35,6 +35,8 @@ namespace XNote
             // 禁止自动创建列
             dgvDataBase.AutoGenerateColumns = false;
             LoadAllDatas();
+
+            dgvDataBase.CurrentCell = dgvDataBase.Rows[dgvDataBase.Rows.Count - 1].Cells[1];
         }
 
         private void LoadAllDatas()

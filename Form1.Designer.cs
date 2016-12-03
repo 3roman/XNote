@@ -29,20 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.dgv = new System.Windows.Forms.DataGridView();
+            this.dgvDataBase = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt = new System.Windows.Forms.TextBox();
+            this.txtKeyWord = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuNewItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFlushItems = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuOpenStandrad = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSetDirectory = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuViewPicture = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSavePicture1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,39 +45,42 @@
             this.mnuDeletePicture = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuBackUP = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataBase)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgv
+            // dgvDataBase
             // 
-            this.dgv.AllowUserToOrderColumns = true;
-            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.ColumnHeadersHeight = 27;
-            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvDataBase.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SandyBrown;
+            this.dgvDataBase.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDataBase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDataBase.ColumnHeadersHeight = 27;
+            this.dgvDataBase.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dgv.Location = new System.Drawing.Point(0, 34);
-            this.dgv.MultiSelect = false;
-            this.dgv.Name = "dgv";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.DarkBlue;
-            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgv.RowTemplate.Height = 23;
-            this.dgv.Size = new System.Drawing.Size(814, 434);
-            this.dgv.TabIndex = 0;
-            this.dgv.TabStop = false;
-            this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CellMouseDown);
-            this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
-            this.dgv.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgv_UserDeletingRow);
+            this.dgvDataBase.Location = new System.Drawing.Point(0, 34);
+            this.dgvDataBase.MultiSelect = false;
+            this.dgvDataBase.Name = "dgvDataBase";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.DarkBlue;
+            this.dgvDataBase.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvDataBase.RowTemplate.Height = 23;
+            this.dgvDataBase.Size = new System.Drawing.Size(814, 434);
+            this.dgvDataBase.TabIndex = 0;
+            this.dgvDataBase.TabStop = false;
+            this.dgvDataBase.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvDataBase_UserDeletingRow);
+            this.dgvDataBase.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDataBase_CellMouseDown);
+            this.dgvDataBase.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDataBase_RowPostPaint);
             // 
             // label1
             // 
@@ -93,72 +91,29 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "检索记录";
             // 
-            // txt
+            // txtKeyWord
             // 
-            this.txt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txt.Location = new System.Drawing.Point(66, 5);
-            this.txt.Name = "txt";
-            this.txt.Size = new System.Drawing.Size(745, 21);
-            this.txt.TabIndex = 0;
-            this.txt.TextChanged += new System.EventHandler(this.txt_TextChanged);
+            this.txtKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyWord.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtKeyWord.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtKeyWord.Location = new System.Drawing.Point(66, 5);
+            this.txtKeyWord.Name = "txtKeyWord";
+            this.txtKeyWord.Size = new System.Drawing.Size(745, 21);
+            this.txtKeyWord.TabIndex = 0;
+            this.txtKeyWord.TextChanged += new System.EventHandler(this.txtKeyWord_TextChanged);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuNewItem,
-            this.mnuFlushItems,
-            this.toolStripSeparator2,
-            this.mnuOpenStandrad,
-            this.mnuSetDirectory,
-            this.toolStripSeparator3,
             this.mnuViewPicture,
             this.toolStripMenuItem1,
             this.mnuDeletePicture,
             this.toolStripSeparator1,
-            this.mnuBackUP});
+            this.mnuBackUP,
+            this.mnuAbout});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 198);
-            // 
-            // mnuNewItem
-            // 
-            this.mnuNewItem.Name = "mnuNewItem";
-            this.mnuNewItem.Size = new System.Drawing.Size(136, 22);
-            this.mnuNewItem.Text = "新增记录";
-            this.mnuNewItem.Click += new System.EventHandler(this.mnuNewItem_Click);
-            // 
-            // mnuFlushItems
-            // 
-            this.mnuFlushItems.Name = "mnuFlushItems";
-            this.mnuFlushItems.Size = new System.Drawing.Size(136, 22);
-            this.mnuFlushItems.Text = "刷新纪录";
-            this.mnuFlushItems.Click += new System.EventHandler(this.mnuFlushItems_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
-            // 
-            // mnuOpenStandrad
-            // 
-            this.mnuOpenStandrad.Name = "mnuOpenStandrad";
-            this.mnuOpenStandrad.Size = new System.Drawing.Size(136, 22);
-            this.mnuOpenStandrad.Text = "打开标准";
-            this.mnuOpenStandrad.Click += new System.EventHandler(this.mnuOpenStandrad_Click);
-            // 
-            // mnuSetDirectory
-            // 
-            this.mnuSetDirectory.Name = "mnuSetDirectory";
-            this.mnuSetDirectory.Size = new System.Drawing.Size(136, 22);
-            this.mnuSetDirectory.Text = "设置目录";
-            this.mnuSetDirectory.Click += new System.EventHandler(this.mnuSetDirectory_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(133, 6);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 120);
             // 
             // mnuViewPicture
             // 
@@ -208,30 +163,40 @@
             this.mnuBackUP.Text = "备份数据库";
             this.mnuBackUP.Click += new System.EventHandler(this.mnuBackUp_Click);
             // 
+            // mnuAbout
+            // 
+            this.mnuAbout.Name = "mnuAbout";
+            this.mnuAbout.Size = new System.Drawing.Size(136, 22);
+            this.mnuAbout.Text = "关于本软件";
+            // 
             // Column1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.DataPropertyName = "序号";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column1.HeaderText = "序号";
             this.Column1.Name = "Column1";
             this.Column1.Visible = false;
             // 
             // Column2
             // 
+            this.Column2.DataPropertyName = "记录";
             this.Column2.FillWeight = 155.9391F;
             this.Column2.HeaderText = "记录";
             this.Column2.Name = "Column2";
             // 
             // Column3
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column3.DataPropertyName = "分类";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column3.FillWeight = 19.49239F;
             this.Column3.HeaderText = "分类";
             this.Column3.Name = "Column3";
             // 
             // Column4
             // 
+            this.Column4.DataPropertyName = "来源";
             this.Column4.FillWeight = 19.49239F;
             this.Column4.HeaderText = "来源";
             this.Column4.Name = "Column4";
@@ -241,17 +206,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 468);
-            this.Controls.Add(this.txt);
+            this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgv);
-            this.Font = new System.Drawing.Font("宋体", 10F);
+            this.Controls.Add(this.dgvDataBase);
+            this.Font = new System.Drawing.Font("SimSun", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataBase)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -260,23 +225,18 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.DataGridView dgvDataBase;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt;
+        private System.Windows.Forms.TextBox txtKeyWord;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuOpenStandrad;
-        private System.Windows.Forms.ToolStripMenuItem mnuSetDirectory;
         private System.Windows.Forms.ToolStripMenuItem mnuBackUP;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnuViewPicture;
-        private System.Windows.Forms.ToolStripMenuItem mnuNewItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem mnuFlushItems;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuSavePicture1;
         private System.Windows.Forms.ToolStripMenuItem mnuSavePicture2;
         private System.Windows.Forms.ToolStripMenuItem mnuDeletePicture;
+        private System.Windows.Forms.ToolStripMenuItem mnuAbout;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

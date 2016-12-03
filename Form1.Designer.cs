@@ -37,12 +37,10 @@
             this.dgvDataBase = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.txtKeyWord = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewPicture = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSavePicture1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSavePicture2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDeletePicture = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuViewImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDeleteImage = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuBackUP = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +48,9 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataBase)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
+            this.menuDataGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDataBase
@@ -68,13 +67,15 @@
             this.Column1,
             this.Column2,
             this.Column3,
-            this.Column4});
+            this.Column4,
+            this.Column5});
             this.dgvDataBase.Location = new System.Drawing.Point(0, 34);
             this.dgvDataBase.MultiSelect = false;
             this.dgvDataBase.Name = "dgvDataBase";
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.DarkBlue;
             this.dgvDataBase.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDataBase.RowTemplate.Height = 23;
+            this.dgvDataBase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDataBase.Size = new System.Drawing.Size(814, 434);
             this.dgvDataBase.TabIndex = 0;
             this.dgvDataBase.TabStop = false;
@@ -103,53 +104,38 @@
             this.txtKeyWord.TabIndex = 0;
             this.txtKeyWord.TextChanged += new System.EventHandler(this.txtKeyWord_TextChanged);
             // 
-            // contextMenuStrip1
+            // menuDataGridView
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewPicture,
-            this.toolStripMenuItem1,
-            this.mnuDeletePicture,
+            this.menuDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewImage,
+            this.mnuSaveImage,
+            this.mnuDeleteImage,
             this.toolStripSeparator1,
             this.mnuBackUP,
             this.mnuAbout});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 120);
+            this.menuDataGridView.Name = "contextMenuStrip1";
+            this.menuDataGridView.Size = new System.Drawing.Size(137, 120);
             // 
-            // mnuViewPicture
+            // mnuViewImage
             // 
-            this.mnuViewPicture.Name = "mnuViewPicture";
-            this.mnuViewPicture.Size = new System.Drawing.Size(136, 22);
-            this.mnuViewPicture.Text = "查看图片";
-            this.mnuViewPicture.Click += new System.EventHandler(this.mnuViewPicture_Click);
+            this.mnuViewImage.Name = "mnuViewImage";
+            this.mnuViewImage.Size = new System.Drawing.Size(136, 22);
+            this.mnuViewImage.Text = "查看图片";
+            this.mnuViewImage.Click += new System.EventHandler(this.mnuViewImage_Click);
             // 
-            // toolStripMenuItem1
+            // mnuSaveImage
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSavePicture1,
-            this.mnuSavePicture2});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
-            this.toolStripMenuItem1.Text = "保存图片";
+            this.mnuSaveImage.Name = "mnuSaveImage";
+            this.mnuSaveImage.Size = new System.Drawing.Size(136, 22);
+            this.mnuSaveImage.Text = "保存图片";
+            this.mnuSaveImage.Click += new System.EventHandler(this.mnuSaveImage_Click);
             // 
-            // mnuSavePicture1
+            // mnuDeleteImage
             // 
-            this.mnuSavePicture1.Name = "mnuSavePicture1";
-            this.mnuSavePicture1.Size = new System.Drawing.Size(136, 22);
-            this.mnuSavePicture1.Text = "来自剪切板";
-            this.mnuSavePicture1.Click += new System.EventHandler(this.mnuSavePicture1_Click);
-            // 
-            // mnuSavePicture2
-            // 
-            this.mnuSavePicture2.Name = "mnuSavePicture2";
-            this.mnuSavePicture2.Size = new System.Drawing.Size(136, 22);
-            this.mnuSavePicture2.Text = "来自文件";
-            // 
-            // mnuDeletePicture
-            // 
-            this.mnuDeletePicture.Name = "mnuDeletePicture";
-            this.mnuDeletePicture.Size = new System.Drawing.Size(136, 22);
-            this.mnuDeletePicture.Text = "删除图片";
-            this.mnuDeletePicture.Click += new System.EventHandler(this.mnuDeletePicture_Click);
+            this.mnuDeleteImage.Name = "mnuDeleteImage";
+            this.mnuDeleteImage.Size = new System.Drawing.Size(136, 22);
+            this.mnuDeleteImage.Text = "删除图片";
+            this.mnuDeleteImage.Click += new System.EventHandler(this.mnuDeleteImage_Click);
             // 
             // toolStripSeparator1
             // 
@@ -201,12 +187,20 @@
             this.Column4.HeaderText = "来源";
             this.Column4.Name = "Column4";
             // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "图片标记";
+            this.Column5.HeaderText = "图片标记";
+            this.Column5.Name = "Column5";
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column5.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 468);
-            this.ContextMenuStrip = this.contextMenuStrip1;
+            this.ContextMenuStrip = this.menuDataGridView;
             this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvDataBase);
@@ -217,7 +211,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataBase)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.menuDataGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,19 +222,18 @@
         private System.Windows.Forms.DataGridView dgvDataBase;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtKeyWord;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip menuDataGridView;
         private System.Windows.Forms.ToolStripMenuItem mnuBackUP;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewPicture;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuSavePicture1;
-        private System.Windows.Forms.ToolStripMenuItem mnuSavePicture2;
-        private System.Windows.Forms.ToolStripMenuItem mnuDeletePicture;
+        private System.Windows.Forms.ToolStripMenuItem mnuViewImage;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaveImage;
+        private System.Windows.Forms.ToolStripMenuItem mnuDeleteImage;
         private System.Windows.Forms.ToolStripMenuItem mnuAbout;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
     }
 }
 

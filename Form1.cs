@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using XNote.Class;
 
@@ -28,8 +29,9 @@ namespace XNote
 
             _sqLiteHelper = new SQLiteHelper(DatabasePath);
 
-            // 在控件初始化(InitializeComponent)后才订阅CellValueChanged事件
+            // 延时（InitializeComponent之后）订阅事件
             dgvDataBase.CellValueChanged += dgvDataBase_CellValueChanged;
+            
             // 禁止自动创建列
             dgvDataBase.AutoGenerateColumns = false;
             LoadAllDatas();
@@ -56,6 +58,11 @@ namespace XNote
             }
             sql = sql.Substring(0, sql.Length - 4);
             dgvDataBase.DataSource = _sqLiteHelper.ExecuteQuery(sql);
+
+            foreach (var row in dgvDataBase.Rows.Cast<DataGridViewRow>().Where(row => Convert.ToBoolean(row.Cells[4].Value)))
+            {
+                row.DefaultCellStyle.BackColor = Color.Cyan;
+            }
 
         }
 
@@ -108,7 +115,6 @@ namespace XNote
             }
         }
 
-
         // 显示行号
         private void dgvDataBase_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -128,7 +134,7 @@ namespace XNote
                 dgvDataBase.ClearSelection();
                 dgvDataBase.Rows[e.RowIndex].Selected = true;
                 dgvDataBase.CurrentCell = dgvDataBase.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                menuDataGridView.Show(MousePosition.X, MousePosition.Y);
             }
         }
 
@@ -142,7 +148,7 @@ namespace XNote
             }
         }
 
-        private void mnuViewPicture_Click(object sender, EventArgs e)
+        private void mnuViewImage_Click(object sender, EventArgs e)
         {
             // 构造图片路径
             var temp = Environment.GetEnvironmentVariable("TEMP");
@@ -158,25 +164,31 @@ namespace XNote
             {
                 return;
             }
-
             // 保存图片
             ImageHelper.BytesToImage((Byte[])dt.Rows[0]["图片"], imagePath, false);
             Process.Start(imagePath);
         }
 
-        private void mnuSavePicture1_Click(object sender, EventArgs e)
+        private void mnuSaveImage_Click(object sender, EventArgs e)
         {
             var img = Clipboard.GetImage();
             var buffer = ImageHelper.ImageToBytes(img, ImageFormat.Png);
             _sqLiteHelper.SaveImage("xnote", "图片", "序号", dgvDataBase.CurrentRow.Cells[0].Value + "", buffer);
+            var sql = string.Format("UPDATE xnote SET 图片标记='1'  WHERE 序号='{0}'",
+                dgvDataBase.CurrentRow.Cells[0].Value + "");
+            _sqLiteHelper.ExecuteQuery(sql);
 
         }
 
-        private void mnuDeletePicture_Click(object sender, EventArgs e)
+        private void mnuDeleteImage_Click(object sender, EventArgs e)
         {
             var sql = string.Format("UPDATE xnote SET 图片=null WHERE 序号='{0}'",
                 dgvDataBase.CurrentRow.Cells[0].Value + "");
             _sqLiteHelper.ExecuteQuery(sql);
+            sql = string.Format("UPDATE xnote SET 图片标记='0' WHERE 序号='{0}'",
+                dgvDataBase.CurrentRow.Cells[0].Value + "");
+            _sqLiteHelper.ExecuteQuery(sql);
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

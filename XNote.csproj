@@ -89,7 +89,6 @@
     </Compile>
     <Compile Include="Class\SQLiteHelper.cs" />
     <EmbeddedResource Include="Resource\XNote.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

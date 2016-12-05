@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace XNote
 {
-    public static class Common
+    static class Common
     {
         public static void StreamToFile(Stream stream, string filePath, bool isOverlay)
         {
@@ -38,6 +38,13 @@ namespace XNote
         {
             Clipboard.Clear();
             Clipboard.SetData(DataFormats.Text, context);
+        }
+
+        public static void SetDoubleBuffered(DataGridView dgv)
+        {
+            var dgvType = dgv.GetType();
+            var pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, true, null);
         }
     }
 }

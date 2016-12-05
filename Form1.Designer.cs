@@ -62,6 +62,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDataBase.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvDataBase.ColumnHeadersHeight = 27;
             this.dgvDataBase.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -75,7 +76,6 @@
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.DarkBlue;
             this.dgvDataBase.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDataBase.RowTemplate.Height = 23;
-            this.dgvDataBase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDataBase.Size = new System.Drawing.Size(814, 434);
             this.dgvDataBase.TabIndex = 0;
             this.dgvDataBase.TabStop = false;
@@ -96,7 +96,7 @@
             // 
             this.txtKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKeyWord.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtKeyWord.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtKeyWord.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtKeyWord.Location = new System.Drawing.Point(66, 5);
             this.txtKeyWord.Name = "txtKeyWord";
@@ -204,7 +204,7 @@
             this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvDataBase);
-            this.Font = new System.Drawing.Font("SimSun", 10F);
+            this.Font = new System.Drawing.Font("宋体", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form1";

@@ -17,9 +17,9 @@ namespace XNote
         public Form1()
         {
             // 为窗体及所有控件启用双缓冲
-            SetStyle(ControlStyles.ResizeRedraw, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            //SetStyle(ControlStyles.ResizeRedraw, true);
+            //SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
             InitializeComponent();
 
@@ -34,9 +34,11 @@ namespace XNote
             
             // 禁止自动创建列
             dgvDataBase.AutoGenerateColumns = false;
-            LoadAllDatas();
 
-            dgvDataBase.CurrentCell = dgvDataBase.Rows[dgvDataBase.Rows.Count - 1].Cells[1];
+            // datagridview启用双缓冲
+            Common.SetDoubleBuffered(dgvDataBase);
+
+            LoadAllDatas();
         }
 
         private void LoadAllDatas()
@@ -60,12 +62,11 @@ namespace XNote
             }
             sql = sql.Substring(0, sql.Length - 4);
             dgvDataBase.DataSource = _sqLiteHelper.ExecuteQuery(sql);
-
             foreach (var row in dgvDataBase.Rows.Cast<DataGridViewRow>().Where(row => Convert.ToBoolean(row.Cells[4].Value)))
             {
                 row.DefaultCellStyle.BackColor = Color.Cyan;
             }
-
+            dgvDataBase.CurrentCell = dgvDataBase.Rows[dgvDataBase.Rows.Count - 1].Cells[1];
         }
 
         // 增+改

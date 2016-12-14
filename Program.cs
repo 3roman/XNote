@@ -29,7 +29,7 @@ namespace XNote
             if (instance == null)
             {
                 var title = string.Format("XNote Ver{0}   『C0der by hangch』", Application.ProductVersion);
-                Application.Run(new Form1 { Text = title });
+                Application.Run(new frmMain { Text = title });
             }
             else
             {

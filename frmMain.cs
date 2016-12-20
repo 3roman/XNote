@@ -24,8 +24,8 @@ namespace XNote
             InitializeComponent();
 
             // 释放资源
-            Common.ReleaseResource("XNote.Resource.System.Data.SQLite.dll", "System.Data.SQLite.dll");
-            Common.ReleaseResource("XNote.Resource.XNote.db", DatabasePath);
+            //Common.ReleaseResource("XNote.System.Data.SQLite.dll", "System.Data.SQLite.dll");
+            Common.ReleaseResource("XNote.XNote.db", DatabasePath);
 
             _sqLiteHelper = new SQLiteHelper(DatabasePath);
 
@@ -64,7 +64,7 @@ namespace XNote
             dgvDataBase.DataSource = _sqLiteHelper.ExecuteQuery(sql);
             foreach (var row in dgvDataBase.Rows.Cast<DataGridViewRow>().Where(row => Convert.ToBoolean(row.Cells[4].Value)))
             {
-                row.DefaultCellStyle.BackColor = Color.SandyBrown;
+                row.DefaultCellStyle.BackColor = Color.FromArgb(221, 235, 247);
             }
             dgvDataBase.CurrentCell = dgvDataBase.Rows[dgvDataBase.Rows.Count - 1].Cells[1];
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using XNote.Class;
 
 namespace XNote
 {
@@ -23,6 +24,11 @@ namespace XNote
         [STAThread]
         private static void Main()
         {
+            // 加载嵌入的dll资源
+            EmbeddedAssembly.Load("XNote.System.Data.SQLite.dll", "System.Data.SQLite.dll");
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => EmbeddedAssembly.Get(args.Name);
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var instance = GetRunningInstance();

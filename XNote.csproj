@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Common.cs" />
+    <Compile Include="Class\EmbeddedAssembly.cs" />
     <Compile Include="Class\ImageHelper.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -88,11 +89,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Class\SQLiteHelper.cs" />
-    <EmbeddedResource Include="Resource\XNote.db">
+    <EmbeddedResource Include="XNote.db">
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\System.Data.SQLite.dll" />
+    <EmbeddedResource Include="System.Data.SQLite.dll">
+    </EmbeddedResource>
     <Content Include="XNote.ico" />
   </ItemGroup>
   <ItemGroup />

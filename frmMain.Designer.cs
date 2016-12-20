@@ -57,7 +57,7 @@
             // dgvDataBase
             // 
             this.dgvDataBase.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(254)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(214)))));
             this.dgvDataBase.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDataBase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
@@ -65,9 +65,9 @@
             this.dgvDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDataBase.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(125)))), ((int)(((byte)(49)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -83,10 +83,8 @@
             this.dgvDataBase.Location = new System.Drawing.Point(0, 34);
             this.dgvDataBase.MultiSelect = false;
             this.dgvDataBase.Name = "dgvDataBase";
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(92)))), ((int)(((byte)(182)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.dgvDataBase.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDataBase.RowTemplate.Height = 23;
             this.dgvDataBase.Size = new System.Drawing.Size(814, 434);

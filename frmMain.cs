@@ -56,7 +56,8 @@ namespace XNote
             {
                 if (string.Empty != keyword)
                 {
-                    sql = sql + string.Format("记录 LIKE '%{0}%' OR ", keyword);
+                    // 多关键字
+                    sql = sql + string.Format("记录 LIKE '%{0}%' AND ", keyword);
                 }
 
             }

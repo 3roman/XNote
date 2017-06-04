@@ -9,12 +9,12 @@ using XNote.Class;
 
 namespace XNote
 {
-    public partial class frmMain : Form
+    public partial class MainForm : Form
     {
         private readonly SQLiteHelper _sqLiteHelper;
         private const string DatabasePath = "XNote.db";
 
-        public frmMain()
+        public MainForm()
         {
             // 为窗体及所有控件启用双缓冲
             //SetStyle(ControlStyles.ResizeRedraw, true);
@@ -59,7 +59,6 @@ namespace XNote
                     // 多关键字
                     sql = sql + string.Format("记录 LIKE '%{0}%' AND ", keyword);
                 }
-
             }
             sql = sql.Substring(0, sql.Length - 4);
             dgvDataBase.DataSource = _sqLiteHelper.ExecuteQuery(sql);
@@ -74,22 +73,23 @@ namespace XNote
         private void dgvDataBase_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             string sql;
-            var idx = dgvDataBase.CurrentRow.Cells[0].Value + "";
-            var record = dgvDataBase.CurrentRow.Cells[1].Value + "";
-            var catg = dgvDataBase.CurrentRow.Cells[2].Value + "";
-            var from = dgvDataBase.CurrentRow.Cells[3].Value + "";
+            var idx = dgvDataBase.CurrentRow.Cells[0].Value + string.Empty;
+            var record = dgvDataBase.CurrentRow.Cells[1].Value + string.Empty;
+            var from = dgvDataBase.CurrentRow.Cells[2].Value + string.Empty;
+            var catg = dgvDataBase.CurrentRow.Cells[3].Value + string.Empty;
 
             if (string.Empty == idx)
             {
                 // 新增记录
-                sql = string.Format("INSERT INTO xnote(记录, 分类, 来源) VALUES('{0}','{1}','{2}')",
+                sql = string.Format("INSERT INTO xnote(记录, 来源, 分类) VALUES('{0}','{1}','{2}')",
                     record,
-                    catg,
-                    from);
+                    from,
+                    catg
+                    );
                 _sqLiteHelper.ExecuteQuery(sql);
                 // 获取新增记录的行号
                 var dt = _sqLiteHelper.ExecuteQuery("SELECT MAX(序号) FROM xnote");
-                dgvDataBase.CurrentRow.Cells[0].Value = dt.Rows[0][0] + "";
+                dgvDataBase.CurrentRow.Cells[0].Value = dt.Rows[0][0] + string.Empty;
             }
             else
             {
@@ -106,7 +106,7 @@ namespace XNote
         // 删
         private void dgvDataBase_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            var idx = dgvDataBase.CurrentRow.Cells[0].Value + "";
+            var idx = dgvDataBase.CurrentRow.Cells[0].Value + string.Empty;
             if (DialogResult.OK ==
                 MessageBox.Show("真的要删除当前记录吗", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
             {
@@ -125,7 +125,7 @@ namespace XNote
             var rownum = e.RowIndex;
             var rct = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y + 4,
                 ((DataGridView)sender).RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, rownum + "", ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
+            TextRenderer.DrawText(e.Graphics, rownum + string.Empty, ((DataGridView)sender).RowHeadersDefaultCellStyle.Font,
                 rct, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, Color.Transparent,
                 TextFormatFlags.Right);
         }
@@ -158,11 +158,11 @@ namespace XNote
             var temp = Environment.GetEnvironmentVariable("TEMP");
             var imagePath = string.Format("{0}\\XNOTE_{1}.png", 
                 temp,
-                dgvDataBase.CurrentRow.Cells[0].Value + "");
+                dgvDataBase.CurrentRow.Cells[0].Value + string.Empty);
 
             // 读取图片
             var sql = string.Format("SELECT 图片 FROM xnote WHERE 序号='{0}'",
-                dgvDataBase.CurrentRow.Cells[0].Value + "");
+                dgvDataBase.CurrentRow.Cells[0].Value + string.Empty);
             var dt = _sqLiteHelper.ExecuteQuery(sql);
             if (dt.Rows[0]["图片"] is DBNull)
             {
@@ -177,9 +177,9 @@ namespace XNote
         {
             var img = Clipboard.GetImage();
             var buffer = ImageHelper.ImageToBytes(img, ImageFormat.Png);
-            _sqLiteHelper.SaveImage("xnote", "图片", "序号", dgvDataBase.CurrentRow.Cells[0].Value + "", buffer);
+            _sqLiteHelper.SaveImage("xnote", "图片", "序号", dgvDataBase.CurrentRow.Cells[0].Value + string.Empty, buffer);
             var sql = string.Format("UPDATE xnote SET 图片标记='1'  WHERE 序号='{0}'",
-                dgvDataBase.CurrentRow.Cells[0].Value + "");
+                dgvDataBase.CurrentRow.Cells[0].Value + string.Empty);
             _sqLiteHelper.ExecuteQuery(sql);
 
         }
@@ -187,10 +187,10 @@ namespace XNote
         private void mnuDeleteImage_Click(object sender, EventArgs e)
         {
             var sql = string.Format("UPDATE xnote SET 图片=null WHERE 序号='{0}'",
-                dgvDataBase.CurrentRow.Cells[0].Value + "");
+                dgvDataBase.CurrentRow.Cells[0].Value + string.Empty);
             _sqLiteHelper.ExecuteQuery(sql);
             sql = string.Format("UPDATE xnote SET 图片标记='0' WHERE 序号='{0}'",
-                dgvDataBase.CurrentRow.Cells[0].Value + "");
+                dgvDataBase.CurrentRow.Cells[0].Value + string.Empty);
             _sqLiteHelper.ExecuteQuery(sql);
 
         }
@@ -208,7 +208,7 @@ namespace XNote
             }
             else if ((Keys.C | Keys.Control) == e.KeyData && dgvDataBase.Focused && !dgvDataBase.CurrentCell.IsInEditMode)
             {
-                Common.Copy2Clipboard(dgvDataBase.SelectedCells[0].Value + "");
+                Common.Copy2Clipboard(dgvDataBase.SelectedCells[0].Value + string.Empty);
             }
             else if ((Keys.V | Keys.Control) == e.KeyData && dgvDataBase.Focused && !dgvDataBase.CurrentCell.IsInEditMode)
             {

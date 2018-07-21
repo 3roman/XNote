@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers>
+  <Commander />
+  <PropertyChanged />
+
+  <Costura DisableCompression='false' IncludeDebugSymbols='false' CreateTemporaryAssemblies='false'>
+    <Unmanaged32Assemblies>
+      sqlite3
+    </Unmanaged32Assemblies>
+  </Costura>
+</Weavers>

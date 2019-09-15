@@ -1,13 +1,11 @@
-﻿using PropertyChanged;
-
-namespace XNote.Model
+﻿namespace XNote
 {
-    [ImplementPropertyChanged]
     class Record
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Content { get; set; }
-        public string Reference { get; set; }
-       
+        public string Standard { get; set; }
+        public string Clause { get; set; }
+        public int ImageFlag { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace XNote
 {
@@ -21,12 +22,13 @@ namespace XNote
             using (var conn = new SQLiteConnection(ConnectionString))
             {
                 // list数据源必须先转换再绑定
-                var bs  = new BindingSource {
+                var bs = new BindingSource
+                {
                     DataSource = conn.Query<Record>("SELECT DISTINCT * FROM record")
                 };
                 DgvMain.DataSource = bs;
             }
-            DgvMain.CurrentCell = DgvMain.Rows[DgvMain.Rows.Count -1 ].Cells[1];
+            DgvMain.CurrentCell = DgvMain.Rows[DgvMain.Rows.Count - 1].Cells[1];
 
             // 延时订阅CellValueChanged事件
             DgvMain.CellValueChanged += DgvMain_CellValueChanged;
@@ -95,7 +97,7 @@ namespace XNote
                 using (var conn = new SQLiteConnection(ConnectionString))
                 {
                     conn.Execute("INSERT INTO record(content, standard, clause)VALUES(@Content,@Standard,@Clause)",
-                        new 
+                        new
                         {
                             Content = content,
                             Standard = standard,
@@ -194,7 +196,7 @@ namespace XNote
             using (var conn = new SQLiteConnection(ConnectionString))
             {
                 var data = conn.Query<byte[]>("SELECT image FROM record WHERE id=@ID",
-                    new{ID = DgvMain.CurrentRow.Cells[0].Value}).First<byte[]>();
+                    new { ID = DgvMain.CurrentRow.Cells[0].Value }).First<byte[]>();
                 if (null == data)
                 {
                     return;
@@ -216,7 +218,7 @@ namespace XNote
                 // 设置图片标志
                 conn.Execute("UPDATE record SET imageflag='1' WHERE id=@ID", new { ID = id });
                 // 保存图片
-                conn.Execute("UPDATE record SET image=@Image WHERE id=@ID", new { ID = id, Image=buffer});
+                conn.Execute("UPDATE record SET image=@Image WHERE id=@ID", new { ID = id, Image = buffer });
                 MessageBox.Show("图片保存成功^_^");
             }
         }
@@ -229,7 +231,7 @@ namespace XNote
                 // 设置图片标志
                 conn.Execute("UPDATE record SET imageflag=null  WHERE id=@ID", new { ID = id });
                 // 保存图片
-                conn.Execute("UPDATE record SET image=null  WHERE id=@ID", new { ID = id});
+                conn.Execute("UPDATE record SET image=null  WHERE id=@ID", new { ID = id });
                 MessageBox.Show("图片删除成功^_^");
             }
         }
@@ -257,9 +259,13 @@ namespace XNote
         // 定义快捷键
         private void FrmMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((Keys.Escape == e.KeyCode && TxtKeyWord.Focused))
+            if ((Keys.R | Keys.Control) == e.KeyData)
             {
                 TxtKeyWord.Clear();
+            }
+            else if ((Keys.F | Keys.Control) == e.KeyData)
+            {
+                TxtKeyWord.Focus();
             }
             else if ((Keys.D | Keys.Control) == e.KeyData && DgvMain.Focused)
             {
@@ -271,12 +277,28 @@ namespace XNote
                 DgvMain.CurrentCell.Value = Clipboard.GetData(DataFormats.Text);
                 DgvMain.BeginEdit(false);
             }
-            else if ((Keys.F | Keys.Control) == e.KeyData)
-            {
-                TxtKeyWord.Focus();
-            }
         }
 
-       
+        // 按标准号排序
+        private bool isAscending = true;
+        private void DgvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            using (var conn = new SQLiteConnection(ConnectionString))
+            {
+                var bs = new BindingSource();
+                if (isAscending)
+                {
+                    bs.DataSource = conn.Query<Record>("SELECT DISTINCT * FROM record ORDER BY Standard ASC");
+                }
+                else
+                {
+                    bs.DataSource = conn.Query<Record>("SELECT DISTINCT * FROM record ORDER BY Standard DESC");
+                }
+
+                DgvMain.DataSource = bs;
+            }
+
+            isAscending = !isAscending;
+        }
     }
 }

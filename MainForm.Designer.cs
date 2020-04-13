@@ -57,9 +57,9 @@
             this.杂项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpenCurrentDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.备份数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuZIP = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuZIP = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMain)).BeginInit();
             this.menuDataGridView.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -102,6 +102,7 @@
             this.DgvMain.TabIndex = 0;
             this.DgvMain.TabStop = false;
             this.DgvMain.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_CellMouseDown);
+            this.DgvMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvMain_ColumnHeaderMouseClick);
             this.DgvMain.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvMain_RowPostPaint);
             this.DgvMain.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.DgvMain_UserDeletingRow);
             // 
@@ -271,16 +272,23 @@
             // mnuOpenCurrentDirectory
             // 
             this.mnuOpenCurrentDirectory.Name = "mnuOpenCurrentDirectory";
-            this.mnuOpenCurrentDirectory.Size = new System.Drawing.Size(180, 22);
+            this.mnuOpenCurrentDirectory.Size = new System.Drawing.Size(136, 22);
             this.mnuOpenCurrentDirectory.Text = "打开目录";
             this.mnuOpenCurrentDirectory.Click += new System.EventHandler(this.MnuOpenCurrentDirectory_Click);
             // 
             // 备份数据库ToolStripMenuItem
             // 
             this.备份数据库ToolStripMenuItem.Name = "备份数据库ToolStripMenuItem";
-            this.备份数据库ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.备份数据库ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.备份数据库ToolStripMenuItem.Text = "备份数据库";
             this.备份数据库ToolStripMenuItem.Click += new System.EventHandler(this.MnuBackUp_Click);
+            // 
+            // MnuZIP
+            // 
+            this.MnuZIP.Name = "MnuZIP";
+            this.MnuZIP.Size = new System.Drawing.Size(136, 22);
+            this.MnuZIP.Text = "压缩数据库";
+            this.MnuZIP.Click += new System.EventHandler(this.MnuZIP_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -295,13 +303,6 @@
             this.关于本软件ToolStripMenuItem.Name = "关于本软件ToolStripMenuItem";
             this.关于本软件ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.关于本软件ToolStripMenuItem.Text = "关于本软件";
-            // 
-            // MnuZIP
-            // 
-            this.MnuZIP.Name = "MnuZIP";
-            this.MnuZIP.Size = new System.Drawing.Size(180, 22);
-            this.MnuZIP.Text = "压缩数据库";
-            this.MnuZIP.Click += new System.EventHandler(this.MnuZIP_Click);
             // 
             // MainForm
             // 

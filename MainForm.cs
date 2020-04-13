@@ -6,7 +6,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.ComponentModel;
 
 namespace XNote
 {
@@ -256,29 +255,6 @@ namespace XNote
             }
         }
 
-        // 定义快捷键
-        private void FrmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((Keys.R | Keys.Control) == e.KeyData)
-            {
-                TxtKeyWord.Clear();
-            }
-            else if ((Keys.F | Keys.Control) == e.KeyData)
-            {
-                TxtKeyWord.Focus();
-            }
-            else if ((Keys.D | Keys.Control) == e.KeyData && DgvMain.Focused)
-            {
-                DgvMain.CurrentCell.Value = DgvMain.Rows[DgvMain.CurrentCell.RowIndex - 1].Cells[DgvMain.CurrentCell.ColumnIndex].Value;
-                DgvMain.BeginEdit(false);
-            }
-            else if ((Keys.V | Keys.Control) == e.KeyData && DgvMain.Focused && !DgvMain.CurrentCell.IsInEditMode)
-            {
-                DgvMain.CurrentCell.Value = Clipboard.GetData(DataFormats.Text);
-                DgvMain.BeginEdit(false);
-            }
-        }
-
         // 按标准号排序
         private bool isAscending = true;
         private void DgvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -300,5 +276,34 @@ namespace XNote
 
             isAscending = !isAscending;
         }
+
+        // 定义快捷键
+        private void FrmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keys.R | Keys.Control) == e.KeyData)
+            {
+                TxtKeyWord.Clear();
+            }
+            else if ((Keys.Escape) == e.KeyData && TxtKeyWord.Focused)
+            {
+                TxtKeyWord.Clear();
+            }
+            else if ((Keys.F | Keys.Control) == e.KeyData)
+            {
+                TxtKeyWord.Focus();
+            }
+            else if ((Keys.D | Keys.Control) == e.KeyData && DgvMain.Focused)
+            {
+                DgvMain.CurrentCell.Value = DgvMain.Rows[DgvMain.CurrentCell.RowIndex - 1].Cells[DgvMain.CurrentCell.ColumnIndex].Value;
+                DgvMain.BeginEdit(false);
+            }
+            else if ((Keys.V | Keys.Control) == e.KeyData && DgvMain.Focused && !DgvMain.CurrentCell.IsInEditMode)
+            {
+                DgvMain.CurrentCell.Value = Clipboard.GetData(DataFormats.Text);
+                DgvMain.BeginEdit(false);
+            }
+        }
+
+        
     }
 }

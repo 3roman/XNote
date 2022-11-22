@@ -13,7 +13,7 @@ namespace XNote.ViewModel
 
         public MainViewModel()
         {
-            Thread t = new Thread(() => Records.AddRange(MySQLAccessor.RetrieveAllRecords()));
+            Thread t = new Thread(() => Records.AddRange(MySQLAccessor.RetrieveAllRecords().Result));
             t.Start();
         }
 
@@ -29,7 +29,7 @@ namespace XNote.ViewModel
             {
                 Keywords = string.Empty;
                 Records.Clear();
-                Records.AddRange(MySQLAccessor.RetrieveAllRecords());
+                Records.AddRange(MySQLAccessor.RetrieveAllRecords().Result);
             }
         }
     }

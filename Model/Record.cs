@@ -9,7 +9,6 @@ namespace XNote.Model
         public string Code { get; set; }
         public string Clause { get; set; }
         public string Catalog { get; set; }
-        public byte[] Image { get; set; }
-        public bool ImageFlag => Image != null;
+        public int ImageFlag { get; set; }
     }
 }

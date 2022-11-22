@@ -26,7 +26,7 @@
                     <Style TargetType="{x:Type DataGridCell}" >
                         <!--<Setter Property="FontWeight" Value="Normal"/>-->
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ImageFlag}" Value="True">
+                            <DataTrigger Binding="{Binding ImageFlag}" Value="1">
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </DataTrigger>
                         </Style.Triggers>

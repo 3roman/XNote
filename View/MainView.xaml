@@ -1,0 +1,45 @@
+﻿<Window x:Class="XNote.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="https://github.com/canton7/Stylet"
+        mc:Ignorable="d"
+        Title="XNote-ng" Height="525" Width="787.5">
+    <Border Padding="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Background="#eee" Foreground="MediumVioletRed" Padding="2" FontWeight="Bold" FontSize="13" FontFamily="宋体" 
+                       Text="{Binding Keywords, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown = "{s:Action Search}">
+            </TextBox>
+
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Records}" Margin="0 3" AutoGenerateColumns="False" 
+                      FontSize="13" FontFamily="宋体" AlternatingRowBackground="LightCyan"  
+                      >
+                
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}" >
+                        <!--<Setter Property="FontWeight" Value="Normal"/>-->
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ImageFlag}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Content" Width="3*" Binding="{Binding Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Code" Width="0.5*" Binding="{Binding Code, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Catalog" Width="0.3*" Binding="{Binding Catalog, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Clause" Width="0.3*" Binding="{Binding Clause, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</Window>

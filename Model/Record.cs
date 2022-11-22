@@ -1,14 +1,15 @@
-﻿using PropertyChanged;
+﻿using Stylet;
 
 namespace XNote.Model
 {
-    [ImplementPropertyChanged]
-    class Record
+    public class Record : PropertyChangedBase
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public string Standard { get; set; }
+        public string Code { get; set; }
         public string Clause { get; set; }
-
+        public string Catalog { get; set; }
+        public byte[] Image { get; set; }
+        public bool ImageFlag => Image != null;
     }
 }

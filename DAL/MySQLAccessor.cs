@@ -2,7 +2,6 @@
 using Dapper;
 using System.Collections.Generic;
 using XNote.Model;
-using System.Threading.Tasks;
 
 namespace XNote.DAL
 {
@@ -10,11 +9,11 @@ namespace XNote.DAL
     {
         public static string ConnectionString => "server=;User Id=xnote;password=;Database=xnote";
 
-        public static async Task<IEnumerable<Record>>  RetrieveAllRecords()
+        public static  IEnumerable<Record>  RetrieveAllRecords()
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                IEnumerable<Record> records = await conn.QueryAsync<Record>("SELECT Id,Content,Code,Clause,Catalog,ImageFlag FROM record");
+                IEnumerable<Record> records =  conn.Query<Record>("SELECT Id,Content,Code,Clause,Catalog,ImageFlag FROM record");
                 conn.Close();
 
                 return records;

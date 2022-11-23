@@ -2,7 +2,7 @@
 using XNote.Model;
 using XNote.DAL;
 using System.Windows.Input;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace XNote.ViewModel
 {
@@ -13,8 +13,7 @@ namespace XNote.ViewModel
 
         public MainViewModel()
         {
-            Thread t = new Thread(() => Records.AddRange(MySQLAccessor.RetrieveAllRecords().Result));
-            t.Start();
+            Task.Factory.StartNew(() => Records.AddRange(MySQLAccessor.RetrieveAllRecords()));
         }
 
         public void Search(KeyEventArgs e)
@@ -29,7 +28,7 @@ namespace XNote.ViewModel
             {
                 Keywords = string.Empty;
                 Records.Clear();
-                Records.AddRange(MySQLAccessor.RetrieveAllRecords().Result);
+                Records.AddRange(MySQLAccessor.RetrieveAllRecords());
             }
         }
     }

@@ -52,6 +52,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -77,6 +78,7 @@
     <Compile Include="BootStrapper.cs" />
     <Compile Include="DAL\MySQLAccessor.cs" />
     <Compile Include="Model\Record.cs" />
+    <Compile Include="Utility\ImageHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,7 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
-      <Version>4.0.0</Version>
+      <Version>3.3.3</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Dapper">
       <Version>2.0.123</Version>

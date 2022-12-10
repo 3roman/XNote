@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using XNote.DAL;
@@ -18,6 +19,7 @@ namespace XNote.ViewModel
         public BindableCollection<Record> Records { get; set; } = new BindableCollection<Record>();
         public Record CurrentRow { get; set; } = new Record();
         public string Keywords { get; set; }
+        public string AppTitle => "XNoteN" + $"{Assembly.GetExecutingAssembly().GetName().Version.Major}.{Assembly.GetExecutingAssembly().GetName().Version.Minor}.{Assembly.GetExecutingAssembly().GetName().Version.Build}";
 
         public MainViewModel()
         {

@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    Title="XNote-ng"
+    Title="{Binding AppTitle}"
     Width="787.5"
     Height="525"
     mc:Ignorable="d">

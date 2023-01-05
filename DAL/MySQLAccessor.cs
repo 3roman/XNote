@@ -2,19 +2,19 @@
 using Dapper;
 using System.Collections.Generic;
 using XNote.Model;
-
+using System.Configuration;
 
 namespace XNote.DAL
 {
     public class MySQLAccessor
     {
-        public static string ConnectionString => "server=;User Id=xnote;password=;Database=xnote";
+        public static string ConnectionString => ConfigurationManager.ConnectionStrings["MySQLConnection"].ConnectionString;
 
         public static IEnumerable<Record> RetrieveAllRecords()
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                IEnumerable<Record> records = conn.Query<Record>("SELECT Id, Content, Code, Clause, Catalog, ImageFlag FROM record");
+                IEnumerable<Record> records = conn.Query<Record>("SELECT Id, Content, Code, Clause, Catalog, ImageFlag FROM xnote");
                 conn.Close();
 
                 return records;
@@ -25,7 +25,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = "SELECT * FROM record WHERE ";
+                string sql = "SELECT * FROM xnote WHERE ";
                 foreach (string keyword in keywords)
                 {
                     sql += $"content LIKE '%{keyword}%' AND ";
@@ -42,7 +42,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"DELETE FROM record WHERE id={id}";
+                string sql = $"DELETE FROM xnote WHERE id={id}";
                 int succeed = conn.Execute(sql);
                 conn.Close();
 
@@ -56,7 +56,7 @@ namespace XNote.DAL
             {
                 string sql = $"INSERT INTO record VALUES(NULL, NULL, NULL, NULL, NULL ,NULL, 0)";
                 conn.Execute(sql);
-                sql = "SELECT MAX(id) FROM record";
+                sql = "SELECT MAX(id) FROM xnote";
                 int maxRecordId = conn.QueryFirst<int>(sql);
                 conn.Close();
 
@@ -101,7 +101,7 @@ namespace XNote.DAL
             byte[] buffer;
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"SELECT image FROM record WHERE id={id}";
+                string sql = $"SELECT image FROM xnote WHERE id={id}";
                 buffer = conn.QueryFirst<byte[]>(sql);
                 conn.Close();
             }

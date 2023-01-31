@@ -54,7 +54,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"INSERT INTO record VALUES(NULL, NULL, NULL, NULL, NULL ,NULL, 0)";
+                string sql = $"INSERT INTO xnote VALUES(NULL, NULL, NULL, NULL, NULL ,NULL, 0)";
                 conn.Execute(sql);
                 sql = "SELECT MAX(id) FROM xnote";
                 int maxRecordId = conn.QueryFirst<int>(sql);
@@ -68,7 +68,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"UPDATE record set content='{record.Content}', code='{record.Code}', clause='{record.Clause}', catalog='{record.Catalog}' WHERE id={record.Id}";
+                string sql = $"UPDATE xnote set content='{record.Content}', code='{record.Code}', clause='{record.Clause}', catalog='{record.Catalog}' WHERE id={record.Id}";
                 int succeed = conn.Execute(sql);
                 conn.Close();
 
@@ -80,7 +80,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"UPDATE record set image=@Image, imageflag=1 WHERE id={id}";
+                string sql = $"UPDATE xnote set image=@Image, imageflag=1 WHERE id={id}";
                 conn.Execute(sql, new { Image = buffer });
                 conn.Close();
             }
@@ -90,7 +90,7 @@ namespace XNote.DAL
         {
             using (MySqlConnection conn = new MySqlConnection(ConnectionString))
             {
-                string sql = $"UPDATE record set image=NULL, imageflag=0 WHERE id={id}";
+                string sql = $"UPDATE xnote set image=NULL, imageflag=0 WHERE id={id}";
                 conn.Execute(sql);
                 conn.Close();
             }

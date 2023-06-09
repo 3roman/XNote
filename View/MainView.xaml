@@ -8,7 +8,13 @@
     Title="{Binding AppTitle}"
     Width="787.5"
     Height="525"
+    FocusManager.FocusedElement="{Binding ElementName=txtKeyword}"
     mc:Ignorable="d">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{s:Action ClearTextbox}" />
+    </Window.InputBindings>
+
     <Border Padding="6">
         <Grid>
             <Grid.RowDefinitions>
@@ -17,6 +23,7 @@
             </Grid.RowDefinitions>
 
             <TextBox
+                x:Name="txtKeyword"
                 Padding="2"
                 Background="#eee"
                 FontFamily="宋体"

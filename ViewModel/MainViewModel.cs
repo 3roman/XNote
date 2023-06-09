@@ -27,6 +27,11 @@ namespace XNote.ViewModel
             Records.CollectionChanged += Records_CollectionChanged;
         }
 
+        public void ClearTextbox(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Keywords = string.Empty;
+        }
+
         public void Records_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
